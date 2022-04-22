@@ -3,6 +3,7 @@ import Button from "../Button";
 import Form from "../Form";
 import Illustration from "../Illustration";
 import TextInput from "../TextInput";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
     return (
@@ -21,7 +22,7 @@ export default function Signup() {
                     </Button>
 
                     <div className="info">
-                        Don't have an account? <a href="signup.html">Signup</a> instead.
+                        Don't have an account? <Link to="signup">Signup</Link> instead.
                     </div>
                 </Form>
             </div>
