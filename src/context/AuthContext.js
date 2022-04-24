@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
         return onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
             // setLoading(false);
-        });l
+        });
     }, []);
 
     const signup = async (email, password, userName) => {
