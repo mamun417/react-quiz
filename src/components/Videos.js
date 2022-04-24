@@ -7,8 +7,8 @@ export default function Videos() {
 
     return (
         <>
-            <button onClick={() => setVideoCount((currentCount) => currentCount + 1)}>Increase Me</button>
-            <button onClick={() => setVideoCount((currentCount) => currentCount - 1)}>Decrease Me</button>
+            {/*<button onClick={() => setVideoCount((currentCount) => currentCount + 1)}>Increase Me</button>*/}
+            {/*<button onClick={() => setVideoCount((currentCount) => currentCount - 1)}>Decrease Me</button>*/}
             <div className={classes.videos}>
                 {(() => {
                     let rows = [];

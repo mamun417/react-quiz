@@ -14,21 +14,27 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [agree, setAgree] = useState(false);
+    const [error, setError] = useState("");
+
     const { signup } = useAuth();
     const history = useHistory();
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        setError("");
+
+        if (password !== confirmPassword) {
+            setError("Password miss match!");
+            return false;
+        }
 
         try {
-            // setError("");
             // setLoading(true);
             await signup(email, password, name);
             history.push("/");
         } catch (err) {
-            console.log(err);
             // setLoading(false);
-            // setError("Failed to create an account!");
+            setError(err.message);
         }
     };
 
@@ -45,42 +51,42 @@ export default function Signup() {
                         icon="person"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        required
                     />
-
                     <TextInput
                         type="email"
                         placeholder="Enter email"
                         icon="alternate_email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
-
                     <TextInput
                         type="password"
                         placeholder="Enter password"
                         icon="lock"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
-
                     <TextInput
                         type="password"
                         placeholder="Confirm password"
                         icon="lock_clock"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
                     />
-
                     <Checkbox
                         text="I agree to the Terms &amp; Conditions"
                         value={agree}
                         onChange={(e) => setAgree(e.target.checked)}
+                        required
                     />
-
                     <Button type="submit">
                         <span>Submit Now</span>
-                    </Button>
-
+                    </Button>{" "}
+                    {error && <p className="error">{error}</p>}
                     <div className="info">
                         Already have an account? <Link to="/login">Login</Link> instead.
                     </div>
