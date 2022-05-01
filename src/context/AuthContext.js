@@ -16,14 +16,14 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-    // const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState();
 
     useEffect(() => {
         const auth = getAuth();
         return onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
-            // setLoading(false);
+            setLoading(false);
         });
     }, []);
 
@@ -59,5 +59,5 @@ export function AuthProvider({ children }) {
         logout,
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }
