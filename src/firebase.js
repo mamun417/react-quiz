@@ -2,11 +2,12 @@ import { initializeApp } from "firebase/app";
 
 const app = initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: "react-quiz-dev-1fbfe.firebaseapp.com",
-    projectId: "react-quiz-dev-1fbfe",
-    storageBucket: "react-quiz-dev-1fbfe.appspot.com",
-    messagingSenderId: "650431586146",
-    appId: "1:650431586146:web:e301b3d988b8975aa8563b",
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_ID,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
 });
 
 export default app;
