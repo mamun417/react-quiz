@@ -14,13 +14,5 @@ export default function Video(video) {
         </div>
     );
 
-    return (
-        <>
-            {video.noq ? (
-                <Link to={video.noq ? `quiz/${video.youtubeID}` : ""}>{videoDiv}</Link>
-            ) : (
-                <div>{videoDiv}</div>
-            )}
-        </>
-    );
+    return <>{video.noq ? <Link to={`quiz/${video.youtubeID}`}>{videoDiv}</Link> : <div>{videoDiv}</div>}</>;
 }

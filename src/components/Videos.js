@@ -8,7 +8,7 @@ export default function Videos() {
     const [page, setPage] = useState(1);
     const { loading, error, videos, hasMore } = useVideoList(page);
 
-    const loadMoreData = () => setPage((prevPage) => prevPage + 8);
+    const loadMoreData = () => setPage((prevPage) => prevPage + 6);
 
     return (
         <>

@@ -8,15 +8,19 @@ export default function useVideoList(page) {
     const [hasMore, setHasmore] = useState(true);
 
     useEffect(() => {
-        (async () => {
-            await fetchVideos();
+        (() => {
+            setLoading(true);
+
+            setTimeout(async () => {
+                await fetchVideos();
+            }, 2000);
         })();
     }, [page]);
 
     async function fetchVideos() {
         const db = getDatabase();
         const videoRef = ref(db, "videos");
-        const videoQuery = query(videoRef, orderByKey(), startAt("" + page), limitToFirst(8));
+        const videoQuery = query(videoRef, orderByKey(), startAt("" + page), limitToFirst(6));
 
         try {
             setError(false);
