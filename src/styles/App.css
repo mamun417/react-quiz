@@ -65,3 +65,7 @@ h4 {
     cursor: not-allowed!important;
     background-color: #ddd!important;
 }
+
+.success_answer {
+    background-color: #aab5d3 !important;
+}
