@@ -5,7 +5,6 @@ export default function Answers({ options = [], handleAnswerChange }) {
     return (
         <div className={classes.answers}>
             {options.map((option, index) => {
-                console.log(option);
                 return (
                     <Checkbox
                         key={index}

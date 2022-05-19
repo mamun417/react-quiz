@@ -1,30 +1,50 @@
 import Answers from "../Answers";
 import MiniPlayer from "../MiniPlayer";
 import ProgressBar from "../ProgressBar";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import useQuestions from "../../hooks/useQuestions";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import _ from "lodash";
+import { useAuth } from "../../context/AuthContext";
+import { getDatabase, ref, set } from "firebase/database";
+
+const quizInitialState = {};
+
+const quizReducer = (state, action) => {
+    switch (action.type) {
+        case "questions":
+            action.value.forEach((question) => {
+                question.options.forEach((option) => {
+                    option.checked = false;
+                });
+            });
+            return action.value;
+        case "answer":
+            const questions = _.cloneDeep(state);
+            questions[action.currentQuestionIndex].options[action.optionIndex].checked = action.value;
+
+            return questions;
+        default:
+            return state;
+    }
+};
 
 export default function Quiz() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const { id } = useParams();
     const { loading, error, questions } = useQuestions(id);
-    const [clonedQuestions, setClonedQuestions] = useState([]);
+    const [qna, dispatch] = useReducer(quizReducer, quizInitialState);
+    const { currentUser } = useAuth();
+    const history = useHistory();
 
     useEffect(() => {
-        questions.forEach((question) => {
-            question.options.forEach((option) => {
-                option.checked = false;
-            });
+        dispatch({
+            type: "questions",
+            value: questions,
         });
-
-        setClonedQuestions(_.cloneDeep(questions));
     }, [questions]);
 
     function gotoNextQuestion() {
-        console.log(clonedQuestions[currentQuestionIndex]);
-
         if (currentQuestionIndex + 1 === questions.length) {
             return false;
         }
@@ -41,23 +61,36 @@ export default function Quiz() {
     }
 
     function currentQuestion() {
-        return clonedQuestions[currentQuestionIndex];
+        return qna[currentQuestionIndex];
     }
 
     const progress = questions.length > 0 ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0;
 
     function handleAnswerChange(e, optionIndex) {
-        setClonedQuestions((prevData) => {
-            return {
-                ...prevData,
-                ...(clonedQuestions[currentQuestionIndex].options[optionIndex].checked = e.target.checked),
-            };
+        dispatch({
+            type: "answer",
+            currentQuestionIndex,
+            optionIndex: optionIndex,
+            value: e.target.checked,
         });
     }
 
     async function submit() {
-        console.log(clonedQuestions);
-        console.log("submit form");
+        const { uid } = currentUser;
+
+        const db = getDatabase();
+        const resultRef = ref(db, `result/${uid}`);
+
+        await set(resultRef, {
+            [id]: qna,
+        });
+
+        history.push({
+            pathname: `/result/${id}`,
+            state: {
+                qna,
+            },
+        });
     }
 
     return (
