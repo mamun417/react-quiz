@@ -69,3 +69,7 @@ h4 {
 .success_answer {
     background-color: #aab5d3 !important;
 }
+
+.hidden {
+    display: none;
+}

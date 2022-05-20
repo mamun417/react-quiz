@@ -1,7 +1,19 @@
 import classes from "../styles/ProgressBar.module.css";
 import Button from "./Button";
+import { useState } from "react";
 
 export default function ProgressBar({ gotoNextQuestion, gotoPrevQuestion, progress, currentQuestionIndex, submit }) {
+    const [showToolTip, setShowToolTip] = useState(false);
+    const [toolTipStyle, setTooltipStyle] = useState({});
+
+    const toggleToolTip = () => {
+        setTooltipStyle(() => {
+            return { left: `calc(${progress}% - 65px)` };
+        });
+
+        setShowToolTip((showToolTip) => !showToolTip);
+    };
+
     return (
         <div className={classes.progressBar}>
             <div
@@ -12,9 +24,16 @@ export default function ProgressBar({ gotoNextQuestion, gotoPrevQuestion, progre
             </div>
 
             <div className={classes.rangeArea}>
-                <div className={classes.tooltip}>{progress}% Complete!</div>
+                <div className={`${classes.tooltip} ${!showToolTip && "hidden"}`} style={toolTipStyle}>
+                    {progress}% Complete!
+                </div>
                 <div className={classes.rangeBody}>
-                    <div className={classes.progress} style={{ width: `${progress}%` }} />
+                    <div
+                        onMouseOver={toggleToolTip}
+                        onMouseOut={toggleToolTip}
+                        className={classes.progress}
+                        style={{ width: `${progress}%` }}
+                    />
                 </div>
             </div>
 
