@@ -60,9 +60,7 @@ export default function Quiz() {
         setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex - 1);
     }
 
-    function currentQuestion() {
-        return qna[currentQuestionIndex];
-    }
+    const currentQuestion = qna[currentQuestionIndex];
 
     const progress = questions.length > 0 ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0;
 
@@ -97,11 +95,11 @@ export default function Quiz() {
         <>
             {loading && <div>Loading ...</div>}
             {error && <div>There was an error!</div>}
-            {!loading && currentQuestion() && (
+            {!loading && currentQuestion && (
                 <>
-                    <h1>{currentQuestion().title}</h1>
+                    <h1>{currentQuestion.title}</h1>
                     <h4>Question can have multiple answers</h4>
-                    <Answers options={currentQuestion().options} handleAnswerChange={handleAnswerChange} />
+                    <Answers options={currentQuestion.options} handleAnswerChange={handleAnswerChange} />
                     <ProgressBar
                         gotoNextQuestion={gotoNextQuestion}
                         gotoPrevQuestion={gotoPrevQuestion}
@@ -109,7 +107,7 @@ export default function Quiz() {
                         currentQuestionIndex={currentQuestionIndex}
                         submit={submit}
                     />
-                    <MiniPlayer />
+                    <MiniPlayer youtubeId={id} currentQuestion={currentQuestion} />
                 </>
             )}
         </>
