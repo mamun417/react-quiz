@@ -1,4 +1,3 @@
-import image from "../assets/images/3.jpg";
 import classes from "../styles/MiniPlayer.module.css";
 import { useState } from "react";
 import ReactPlayer from "react-player/youtube";

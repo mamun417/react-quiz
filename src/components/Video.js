@@ -1,4 +1,3 @@
-import image from "../assets/images/3.jpg";
 import classes from "../styles/Video.module.css";
 import { Link } from "react-router-dom";
 

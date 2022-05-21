@@ -15,6 +15,7 @@ export default function useVideoList(page) {
                 await fetchVideos();
             }, 2000);
         })();
+        // eslint-disable-next-line
     }, [page]);
 
     async function fetchVideos() {
