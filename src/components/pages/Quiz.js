@@ -1,7 +1,7 @@
 import Answers from "../Answers";
 import MiniPlayer from "../MiniPlayer";
 import ProgressBar from "../ProgressBar";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useQuestions from "../../hooks/useQuestions";
 import { useEffect, useReducer, useState } from "react";
 import _ from "lodash";
@@ -35,7 +35,7 @@ export default function Quiz() {
     const { loading, error, questions } = useQuestions(id);
     const [qna, dispatch] = useReducer(quizReducer, quizInitialState);
     const { currentUser } = useAuth();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch({
@@ -83,8 +83,8 @@ export default function Quiz() {
             [id]: qna,
         });
 
-        history.push({
-            pathname: `/result/${id}`,
+        navigate(`/result/${id}`, {
+            replace: true,
             state: {
                 qna,
             },

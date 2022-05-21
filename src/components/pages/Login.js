@@ -3,7 +3,7 @@ import Button from "../Button";
 import Form from "../Form";
 import Illustration from "../Illustration";
 import TextInput from "../TextInput";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const history = useHistory();
+    const history = useNavigate();
     const { login } = useAuth();
 
     const handleLogin = async (e) => {

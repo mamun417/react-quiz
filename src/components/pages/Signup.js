@@ -4,7 +4,7 @@ import Checkbox from "../Checkbox";
 import Form from "../Form";
 import Illustration from "../Illustration";
 import TextInput from "../TextInput";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -17,7 +17,7 @@ export default function Signup() {
     const [error, setError] = useState("");
 
     const { signup } = useAuth();
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();

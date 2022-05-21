@@ -1,12 +1,11 @@
 import Analysis from "../Analysis";
 import Summary from "../Summary";
 import useAnswers from "../../hooks/useAnswers";
-import { useHistory, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 
 export default function Result() {
-    const { location } = useHistory();
-    const { state } = location;
+    const { state } = useLocation();
     const { qna } = state;
     const { id: videoId } = useParams();
     const { loading, error, answers } = useAnswers(videoId);

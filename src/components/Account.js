@@ -1,10 +1,10 @@
 import classes from "../styles/Account.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Account() {
     const { currentUser, logout } = useAuth();
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleLogout = async () => {
         try {

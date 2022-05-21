@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "../styles/App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -15,13 +15,13 @@ function App() {
         <Router>
             <AuthProvider>
                 <Layout>
-                    <Switch>
-                        <PrivateRoute exact path="/" component={Home} />
-                        <PublicRoute exact path="/signup" component={Signup} />
-                        <PublicRoute exact path="/login" component={Login} />
-                        <PrivateRoute exact path="/quiz/:id" component={Quiz} />
-                        <PrivateRoute exact path="/result/:id" component={Result} />
-                    </Switch>
+                    <Routes>
+                        <Route path="/" element={<PrivateRoute component={Home} />} />
+                        <Route path="/signup" element={<PublicRoute component={Signup} />} />
+                        <Route path="/login" element={<PublicRoute component={Login} />} />
+                        <Route path="/quiz/:id" element={<PrivateRoute component={Quiz} />} />
+                        <Route path="/result/:id" element={<PrivateRoute component={Result} />} />
+                    </Routes>
                 </Layout>
             </AuthProvider>
         </Router>
