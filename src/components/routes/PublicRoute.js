@@ -1,8 +1,8 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-export default function PublicRoute({ component: Component, ...rest }) {
+export default function PublicRoute() {
     const { currentUser } = useAuth();
 
-    return !currentUser ? <Component {...rest} /> : <Navigate to="/login" />;
+    return !currentUser ? <Outlet /> : <Navigate to="/" />;
 }

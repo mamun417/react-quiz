@@ -58,7 +58,7 @@ export default function Signup() {
                     {error && <p className="error">{error}</p>}
 
                     <div className="info">
-                        Don't have an account? <Link to="signup">Signup</Link> instead.
+                        Don't have an account? <Link to="/signup">Signup</Link> instead.
                     </div>
                 </Form>
             </div>

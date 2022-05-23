@@ -16,11 +16,15 @@ function App() {
             <AuthProvider>
                 <Layout>
                     <Routes>
-                        <Route path="/" element={<PrivateRoute component={Home} />} />
-                        <Route path="/signup" element={<PublicRoute component={Signup} />} />
-                        <Route path="/login" element={<PublicRoute component={Login} />} />
-                        <Route path="/quiz/:id" element={<PrivateRoute component={Quiz} />} />
-                        <Route path="/result/:id" element={<PrivateRoute component={Result} />} />
+                        <Route element={<PublicRoute />}>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                        </Route>
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/quiz/:id" element={<Quiz />} />
+                            <Route path="/result/:id" element={<Result />} />
+                        </Route>
                     </Routes>
                 </Layout>
             </AuthProvider>
