@@ -1,7 +1,7 @@
 import Analysis from "../Analysis";
 import Summary from "../Summary";
 import useAnswers from "../../hooks/useAnswers";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import _ from "lodash";
 
 export default function Result() {

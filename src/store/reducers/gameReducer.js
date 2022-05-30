@@ -1,11 +1,14 @@
+import gameActionTypes from "../types/gameActionTypes";
+
 const gameInitState = { name: "Football" };
 
 const gameReducer = (state = gameInitState, { type, payload }) => {
-    if (type === "UPDATE_GAME") {
-        return { name: payload };
+    switch (type) {
+        case gameActionTypes.UPDATE_GAME:
+            return { ...state, name: payload };
+        default:
+            return state;
     }
-
-    return state;
 };
 
 export default gameReducer;

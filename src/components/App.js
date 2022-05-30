@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "../styles/App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,42 +9,29 @@ import Layout from "./Layout/Layout";
 import { AuthProvider } from "../context/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
-import store from "../store";
-import updatePersonAction from "../store/actions/updatePersonAction";
-import updateGameAction from "../store/actions/updateGameAction";
+import LearnRedux from "./pages/LearnRedux";
+import classes from "../styles/Nav.module.css";
 
 function App() {
-    function updatePersonName() {
-        store.dispatch(updatePersonAction.updateName);
-    }
-
-    function updateGameName() {
-        store.dispatch(updateGameAction.updateName);
-    }
-
     return (
         <Router>
             <AuthProvider>
                 <Layout>
-                    <div>
-                        <div>Check Redux</div> <button onClick={updatePersonName}>update person name</button>
-                        <div>Person name: {store.getState().person.name}</div>
-                        <br />
-                        <br />
-                        <div>Check Redux</div> <button onClick={updateGameName}>update game name</button>
-                        <div>Game name: {store.getState().game.name}</div>
-                    </div>
-                    {/*<Routes>*/}
-                    {/*    <Route element={<PublicRoute />}>*/}
-                    {/*        <Route path="/login" element={<Login />} />*/}
-                    {/*        <Route path="/signup" element={<Signup />} />*/}
-                    {/*    </Route>*/}
-                    {/*    <Route element={<PrivateRoute />}>*/}
-                    {/*        <Route path="/" element={<Home />} />*/}
-                    {/*        <Route path="/quiz/:id" element={<Quiz />} />*/}
-                    {/*        <Route path="/result/:id" element={<Result />} />*/}
-                    {/*    </Route>*/}
-                    {/*</Routes>*/}
+                    <Routes>
+                        <Route element={<PublicRoute />}>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                            <Route path="/learn-redux" element={<LearnRedux />} />
+                        </Route>
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/quiz/:id" element={<Quiz />} />
+                            <Route path="/result/:id" element={<Result />} />
+                        </Route>
+                    </Routes>
+                    <Link to="/learn-redux" className={classes.brand}>
+                        <h3>Learn Redux</h3>
+                    </Link>
                 </Layout>
             </AuthProvider>
         </Router>

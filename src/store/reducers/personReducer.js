@@ -1,9 +1,14 @@
-const personReducer = (state = { name: "Abdullah Al Mamun" }, { type, payload }) => {
-    if (type === "UPDATE_NAME") {
-        return { name: payload };
-    }
+import personActionTypes from "../types/personActionTypes";
 
-    return state;
+const initialState = { name: "Abdullah Al Mamun" };
+
+const personReducer = (state = initialState, { type, payload }) => {
+    switch (type) {
+        case personActionTypes.UPDATE_NAME:
+            return { ...state, name: payload };
+        default:
+            return state;
+    }
 };
 
 export default personReducer;
