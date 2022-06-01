@@ -1,26 +1,46 @@
-import store from "../../store";
-import updatePersonAction from "../../store/actions/personActions";
-import updateGameAction from "../../store/actions/gameActions";
+import personActions from "../../store/actions/personActions";
+import gameActions from "../../store/actions/gameActions";
+import { connect } from "react-redux";
+import LearnRedux2 from "./LearnRedux2";
 
-function LearnRedux() {
-    function updatePersonName() {
-        store.dispatch(updatePersonAction.updateName);
-    }
+function LearnRedux({ store, updateName, updateGame }) {
+    // function updatePersonName() {
+    //     store.dispatch(updateName);
+    // }
 
-    function updateGameName() {
-        store.dispatch(updateGameAction.updateName);
-    }
+    // function updateGameName() {
+    //     store.dispatch(gameAction.updateName);
+    // }
 
     return (
-        <div>
-            <div>Check Redux</div> <button onClick={updatePersonName}>update person name</button>
-            <div>Person name: {store.getState().person.name}</div>
-            <br />
-            <br />
-            <div>Check Redux</div> <button onClick={updateGameName}>update game name</button>
-            <div>Game name: {store.getState().game.name}</div>
-        </div>
+        <>
+            <div>
+                <div>Check Redux</div> <button onClick={() => updateName()}>update person name</button>
+                <div>Person name: {store.person.name}</div>
+                <br />
+                <br />
+                <div>Check Redux</div> <button onClick={() => updateGame()}>update game name</button>
+                <div>Game name: {store.game.name}</div>
+            </div>
+            <LearnRedux2 />
+        </>
     );
 }
 
-export default LearnRedux;
+const mapStateToProps = (state) => ({
+    store: state,
+});
+
+const mapStateToDispatch = {
+    updateName: personActions.updateName,
+    updateGame: gameActions.updateGame,
+};
+
+// note
+// TODO: no need to use dispatch when action is a function
+// const mapStateToDispatch = (dispatch) => ({
+//     updateName: dispatch(personActions.updateName),
+//     updateGame: dispatch(gameActions.updateGame),
+// });
+
+export default connect(mapStateToProps, mapStateToDispatch)(LearnRedux);
