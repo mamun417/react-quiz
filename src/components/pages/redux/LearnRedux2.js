@@ -1,5 +1,5 @@
-import personActions from "../../store/actions/personActions";
-import gameActions from "../../store/actions/gameActions";
+import personActions from "../../../store/actions/personActions";
+import gameActions from "../../../store/actions/gameActions";
 import { useDispatch, useSelector } from "react-redux";
 
 function LearnRedux2() {

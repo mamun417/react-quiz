@@ -9,8 +9,9 @@ import Layout from "./Layout/Layout";
 import { AuthProvider } from "../context/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
-import LearnRedux from "./pages/LearnRedux";
+import LearnRedux from "./pages/redux/LearnRedux";
 import classes from "../styles/Nav.module.css";
+import LearnReduxSynchronus from "./pages/redux/LearnReduxSynchronus";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/signup" element={<Signup />} />
                             <Route path="/learn-redux" element={<LearnRedux />} />
+                            <Route path="/learn-redux-synchronous" element={<LearnReduxSynchronus />} />
                         </Route>
                         <Route element={<PrivateRoute />}>
                             <Route path="/" element={<Home />} />
@@ -31,6 +33,9 @@ function App() {
                     </Routes>
                     <Link to="/learn-redux" className={classes.brand}>
                         <h3>Learn Redux</h3>
+                    </Link>
+                    <Link to="/learn-redux-synchronous" className={classes.brand}>
+                        <h3>Learn Redux Synchronous</h3>
                     </Link>
                 </Layout>
             </AuthProvider>
